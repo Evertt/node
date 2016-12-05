@@ -9,19 +9,19 @@ extension NodeRepresentable {
     public func converted<T: NodeInitializable>(
         to type: T.Type = T.self,
         in context: Context = EmptyNode) throws -> T {
-        let node = try makeNode()
+        let node = makeNode()
         return try type.init(node: node, in: context)
     }
 }
 
 extension NodeInitializable {
     public init(node representable: NodeRepresentable, in context: Context = EmptyNode) throws {
-        let node = try representable.makeNode()
+        let node = representable.makeNode()
         try self.init(node: node, in: context)
     }
 
     public init(node representable: NodeRepresentable?, in context: Context = EmptyNode) throws {
-        let node = try representable?.makeNode() ?? .null
+        let node = representable?.makeNode() ?? .null
         try self.init(node: node, in: context)
     }
 }

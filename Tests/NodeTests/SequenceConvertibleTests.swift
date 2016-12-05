@@ -25,7 +25,7 @@ final class Foo: NodeConvertible {
         self.node = node
     }
 
-    func makeNode(context: Context = EmptyNode) throws -> Node {
+    func makeNode(context: Context = EmptyNode) -> Node {
         self.contextMakeNode = context
         return node
     }
@@ -41,11 +41,11 @@ class SequenceConvertibleTests: XCTestCase {
 
     func testSequence() throws {
         let ints: [Int] = [1,2,3,4,5]
-        let node = try ints.makeNode()
+        let node = ints.makeNode()
         XCTAssert(node == .array([1,2,3,4,5]))
 
         let representables = ints.map { $0 as NodeRepresentable }
-        let node2 = try representables.makeNode()
+        let node2 = representables.makeNode()
         XCTAssert(node2 == .array([1,2,3,4,5]))
 
         let models = try ints.converted(to: [TestInitializable].self)
@@ -70,7 +70,7 @@ class SequenceConvertibleTests: XCTestCase {
 
         let context = ["isContext": true]
 
-        let _ = try [foo1, foo2].makeNode(context: context)
+        let _ = [foo1, foo2].makeNode(context: context)
 
         guard let foo1Context = foo1.contextMakeNode as? [String: Bool], 
             let foo2Context = foo1.contextMakeNode as? [String: Bool] else {
@@ -88,7 +88,7 @@ class SequenceConvertibleTests: XCTestCase {
             "key": "val",
             "hi": "world"
         ]
-        let node = try dict.makeNode()
+        let node = dict.makeNode()
         XCTAssert(node == ["key": "val", "hi": "world"])
 
         let model = try dict.converted(to: TestInitializable.self)

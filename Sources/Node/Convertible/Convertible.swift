@@ -5,12 +5,12 @@ public protocol NodeRepresentable {
         - throws: if convertible can not create a Node
         - returns: a node if possible
     */
-    func makeNode(context: Context) throws -> Node
+    func makeNode(context: Context) -> Node
 }
 
 extension NodeRepresentable {
-    public func makeNode() throws -> Node {
-        return try makeNode(context: EmptyNode)
+    public func makeNode() -> Node {
+        return makeNode(context: EmptyNode)
     }
 }
 
