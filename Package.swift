@@ -4,7 +4,7 @@ let package = Package(
     name: "NodeR",
     targets: [
         Target(
-            name: "Node"
+            name: "NodeR"
         ),
     ],
     dependencies: [
